@@ -1,0 +1,31 @@
+const int trigPin = A0;    // TRIG pin
+const int echoPin = A1;    // ECHO pin
+const int relayPin= 8;
+float duration, dist;
+void setup() { 
+  pinMode(relayPin, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  digitalWrite(relayPin, LOW);
+}
+
+
+void loop() 
+{
+  //ultrasonic sensor distance measuring
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  dist = 0.017 * duration;
+
+
+  if(dist<=21){
+    digitalWrite(relayPin, HIGH);
+    delay(100);
+  }
+  else{
+      digitalWrite(relayPin, LOW);
+  }
+
+}
